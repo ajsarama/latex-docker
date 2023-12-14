@@ -8,19 +8,28 @@ This is an extremely barebones LaTeX container setup. Follow the instructions be
 
 Use the following command to clone the repository somewhere on your local machine:
 ```bash
-git clone ...
+git clone https://github.com/ajsarama/latex-docker.git && cd latex-docker
 ```
 
-1. Run the following commands to get the installer
-wget https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
-zcat < install-tl-unx.tar.gz | tar xf -
-cd install-tl-*
+2. Build a Docker image
 
-2. Run the installer
-perl ./install-tl --no-interaction
+The image outlined in `Dockerfile` does the following:
+- Installs dependencies for the build
+- Downloads the TeX Live source
+- Runs the associated build commands
+- Adds the LaTeX binaries the the `PATH`
 
-3. Update $PATH to include TexLive binaries
-PATH=$PATH:/usr/local/texlive/2023/bin/x86_64-linux
+**WARNING:** Building may take several hours depending on many factors. Adjusting the build command to download from a closer server is possible.
 
-4. Commands need to be run like so:
-pdflatex -shell-escape file.tex
+```bash
+docker build --tag LaTeX .
+```
+
+3. Run the container for the first time
+
+Initialize the container using:
+```bash
+docker run --interactive --tty LaTeX
+```
+
+

@@ -22,14 +22,14 @@ The image outlined in `Dockerfile` does the following:
 **WARNING:** Building may take several hours depending on many factors. Adjusting the build command to download from a closer server is possible.
 
 ```bash
-docker build --tag LaTeX .
+docker build --tag latex .
 ```
 
 3. Run the container for the first time and verify the installation went smoothly
 
 Initialize the container using:
 ```bash
-docker run --interactive --tty --rm LaTeX
+docker run --interactive --tty --rm latex
 ```
 *Arguments:*
 - `interactive` signifies that we intend on using the shell inside the container interactively.
@@ -53,12 +53,12 @@ While inside the container, just type `exit` into the shell. This will put the c
 
 First, create a directory that will be mounted to the container. In this example, `output/` will be mounted. Use the following command to run a container and bind your local directory:
 ```bash
-docker run --interactive --tty --mount type=bind,source="$(pwd)"/output,target=/output/ LaTeX
+docker run --interactive --tty --mount type=bind,source="$(pwd)"/output,target=/output/ latex
 ```
 
 *Arguments:*
 - `mount` has a `source` and `target`. `source` is the directory on your local machine, and `target` is the directory inside the container.
-- Note that the last argument is the image we previously created, `LaTeX`.
+- Note that the last argument is the image we previously created, `latex`.
 
 From inside the interactive environment, use `pdflatex` as if it were installed locally. Make sure the output ends up in the mounted directory from the previous command.
 
